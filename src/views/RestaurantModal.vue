@@ -46,21 +46,22 @@ export default {
     async fetchRestaurantModal(restaurantId) {
       try {
         const response = await restaurantAPI.getRestaurant({ restaurantId });
-        (this.restaurant = {
-          id: response.data.restaurant.id,
-          name: response.data.restaurant.name,
-          categoryName: response.data.restaurant.Category
-            ? response.data.restaurant.Category.name
+        console.log(response)
+        this.restaurant = {
+          id: response.data.data.restaurant.id,
+          name: response.data.data.restaurant.name,
+          categoryName: response.data.data.restaurant.Category
+            ? response.data.data.restaurant.Category.name
             : "未分類",
-          image: response.data.restaurant.image,
-          openingHours: response.data.restaurant.opening_hours,
-          tel: response.data.restaurant.tel,
-          address: response.data.restaurant.address,
-          description: response.data.restaurant.description,
-          isFavorited: response.data.isFavorited,
-          isLiked: response.data.isLiked,
-        }),
-          (this.restaurantComments = response.data.restaurant.Comments);
+          image: response.data.data.restaurant.image,
+          openingHours: response.data.data.restaurant.opening_hours,
+          tel: response.data.data.restaurant.tel,
+          address: response.data.data.restaurant.address,
+          description: response.data.data.data.restaurant.description,
+          isFavorited: response.data.data.isFavorited,
+          isLiked: response.data.data.isLiked,
+        },
+          this.restaurantComments = response.data.data.restaurant.Comments;
       } catch (error) {
         Toast.fire({
           icon: "error",

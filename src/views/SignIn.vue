@@ -7,38 +7,17 @@
 
       <div class="form-label-group mb-2">
         <label for="email">email</label>
-        <input
-          id="email"
-          v-model="email"
-          name="email"
-          type="email"
-          class="form-control"
-          placeholder="email"
-          autocomplete="username"
-          required
-          autofocus
-        />
+        <input id="email" v-model="email" name="email" type="email" class="form-control" placeholder="email"
+          autocomplete="username" required autofocus />
       </div>
 
       <div class="form-label-group mb-3">
         <label for="password">Password</label>
-        <input
-          id="password"
-          v-model="password"
-          name="password"
-          type="password"
-          class="form-control"
-          placeholder="Password"
-          autocomplete="current-password"
-          required
-        />
+        <input id="password" v-model="password" name="password" type="password" class="form-control"
+          placeholder="Password" autocomplete="current-password" required />
       </div>
 
-      <button
-        :disabled="isProcessing"
-        class="btn btn-lg btn-primary btn-block mb-3"
-        type="submit"
-      >
+      <button :disabled="isProcessing" class="btn btn-lg btn-primary btn-block mb-3" type="submit">
         Submit
       </button>
 
@@ -85,12 +64,13 @@ export default {
         });
 
         const { data } = response;
+        console.log(response)
         if (data.status !== "success") {
           throw new Error(data.message);
         }
-        localStorage.setItem("token", data.token);
+        localStorage.setItem("token", data.data.token);
 
-        this.$store.commit("setcurrentuser", data.user);
+        this.$store.commit("setcurrentuser", data.data.user);
 
         this.$router.push("/restaurants");
       } catch (error) {

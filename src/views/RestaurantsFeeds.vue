@@ -1,11 +1,11 @@
 <template>
   <div class="container py-5">
     <NavTabs />
-    <SpinNer v-if="isLoading"/>
+    <SpinNer v-if="isLoading" />
     <template v-else>
       <h1 class="mt-5">最新動態</h1>
       <hr />
-      <div class="row" >
+      <div class="row">
         <div class="col-md-6">
           <h3>最新餐廳</h3>
           <!-- 最新餐廳 NewestRestaurants -->
@@ -18,7 +18,7 @@
         </div>
       </div>
     </template>
-    
+
   </div>
 </template>
 
@@ -36,20 +36,21 @@ export default {
     NewestRestaurantsVue,
     NewestCommentsVue,
     SpinNer
-   },
+  },
   data() {
     return {
       restaurants: [],
       comments: [],
-      isLoading:true
+      isLoading: true
     };
   },
   methods: {
     async fetchFeeds() {
       try {
         const response = await restaurantsAPI.getFeeds({});
-        this.restaurants = response.data.restaurants;
-        this.comments = response.data.comments.filter(
+        console.log(response)
+        this.restaurants = response.data.data.restaurants;
+        this.comments = response.data.data.comments.filter(
           (comment) => comment.Restaurant && comment.text
         );
         this.isLoading = false

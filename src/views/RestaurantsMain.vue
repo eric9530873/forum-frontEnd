@@ -6,21 +6,12 @@
 
     <div class="row">
       <!-- 餐廳卡片 RestaurantCard-->
-      <RestaurantCardVue
-        v-for="restaurant in restaurants"
-        v-bind:key="restaurant.id"
-        :initialrestaurant="restaurant"
-      />
+      <RestaurantCardVue v-for="restaurant in restaurants" v-bind:key="restaurant.id" :initialrestaurant="restaurant" />
     </div>
 
     <!-- 分頁標籤 RestaurantPagination -->
-    <RestaurantsPagination
-      :currentPage="currentPage"
-      :totalPage="totalPage"
-      :previouPage="previouPage"
-      :nextPage="nextPage"
-      :categoryId="categoryId"
-    />
+    <RestaurantsPagination :currentPage="currentPage" :totalPage="totalPage" :previouPage="previouPage"
+      :nextPage="nextPage" :categoryId="categoryId" />
   </div>
 </template>
 
@@ -59,14 +50,14 @@ export default {
           page: page,
           categoryId: categoryId,
         });
-
-        this.restaurants = response.data.restaurants;
-        this.categories = response.data.categories;
-        this.categoryId = response.data.categoryId;
-        this.currentPage = response.data.page;
-        this.totalPage = response.data.totalPage;
-        this.previouPage = response.data.prev;
-        this.nextPage = response.data.next;
+        console.log(response)
+        this.restaurants = response.data.data.restaurants;
+        this.categories = response.data.data.categories;
+        this.categoryId = response.data.data.categoryId;
+        this.currentPage = response.data.data.pagination.currentPage;
+        this.totalPage = response.data.data.pagination.pages;
+        this.previouPage = response.data.data.pagination.prev;
+        this.nextPage = response.data.data.pagination.next;
       } catch (error) {
         Toast.fire({
           icon: "error",
