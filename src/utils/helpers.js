@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
-const baseURL = 'https://forum-master-16.onrender.com'
+const baseURL = 'https://forum-master-16.onrender.com/api'
 
 const axiosInstance = axios.create({
     baseURL
