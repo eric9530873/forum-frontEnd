@@ -1,10 +1,7 @@
 <template>
   <div class="container py-5">
     <!-- 餐廳表單 AdminRestaurantForm -->
-    <AdminRestaurantFormVue
-      @after-submit="handleAferSubmit"
-      :isprocessing="isProcessing"
-    />
+    <AdminRestaurantFormVue @after-submit="handleAferSubmit" :isprocessing="isProcessing" />
   </div>
 </template>
 
@@ -28,6 +25,7 @@ export default {
       try {
         this.isProcessing = true;
         const response = await adminApi.restaurants.create({ formData });
+        console.log(response)
         if (response.data.status !== "success") {
           throw new Error(response.data.message);
         }

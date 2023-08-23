@@ -46,34 +46,34 @@ export default {
   data() {
     return {
       profile: {},
-      isFollowed:'',
+      isFollowed: '',
     };
   },
   methods: {
     async fetchProfile(userId) {
-      try{
-        const response = await usersAPI.get({userId})
-        console.log(response)
-        this.profile = response.data.profile
-        this.isFollowed = response.data.isFollowed
-      }catch(error){
+      try {
+        const response = await usersAPI.get(userId)
+        this.profile = response.data.data
+        this.isFollowed = response.data.data.isFollowed
+      } catch (error) {
         Toast.fire({
-          icon:'error',
-          title:'無法取得'
+          icon: 'error',
+          title: '無法取得'
         })
       }
-      
+
     },
   },
   created() {
-    const { id:userId } = this.$route.params
-    this.fetchProfile(userId);
+    const { id: userId } = this.$route.params
+    this.fetchProfile({ userId });
   },
   computed: {
     ...mapState(["currentUser"]),
   },
   beforeRouteUpdate(to, from, next) {
-    this.fetchProfile(to.params.id)
+    const { id: userId } = to.params
+    this.fetchProfile({ userId })
     next()
   },
 };

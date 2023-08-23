@@ -11,7 +11,7 @@
 
     <ul>
       <li>評論數： {{ restaurant.Comments.length }}</li>
-      <li>瀏覽次數： {{ restaurant.viewCounts }}</li>
+      <li>瀏覽次數： {{ restaurant.viewCount }}</li>
     </ul>
 
     <button type="button" class="btn btn-link" @click="$router.back()">
@@ -30,6 +30,7 @@ export default {
   data() {
     return {
       restaurant: [],
+      restaurantComments: []
     };
   },
   methods: {
@@ -40,7 +41,8 @@ export default {
         if (response.data.status === 'error') {
           throw new Error(response.data.message)
         }
-        this.restaurant = response.data.restaurant;
+        this.restaurant = response.data.data;
+        this.restaurantComments = response.data.data
       } catch (error) {
         Toast.fire({
           icon: 'error',

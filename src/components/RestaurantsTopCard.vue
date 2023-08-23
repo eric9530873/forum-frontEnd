@@ -9,28 +9,18 @@
       <div class="col-md-8">
         <div class="card-body">
           <h5 class="card-title">{{ restaurant.name }}</h5>
-          <span class="badge badge-secondary"
-            >收藏數：{{ restaurant.FavoriteCount }}</span
-          >
+          <span class="badge badge-secondary">收藏數：{{ restaurant.FavoritedUsers.length }}</span>
           <p class="card-text">
             {{ restaurant.description }}
           </p>
-          <router-link :to="{name:'restaurant',params:{id:restaurant.id}}" class="btn btn-primary mr-2">Show</router-link>
+          <router-link :to="{ name: 'restaurant', params: { id: restaurant.id } }"
+            class="btn btn-primary mr-2">Show</router-link>
 
-          <button
-            v-if="restaurant.isFavorited"
-            @click="deleteFavorite(restaurant.id)"
-            type="button"
-            class="btn btn-danger mr-2"
-          >
+          <button v-if="restaurant.isFavorited" @click="deleteFavorite(restaurant.id)" type="button"
+            class="btn btn-danger mr-2">
             移除最愛
           </button>
-          <button
-            @click="addFavorite(restaurant.id)"
-            v-else
-            type="button"
-            class="btn btn-primary"
-          >
+          <button @click="addFavorite(restaurant.id)" v-else type="button" class="btn btn-primary">
             加到最愛
           </button>
         </div>

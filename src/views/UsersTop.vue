@@ -30,7 +30,8 @@ export default {
     async fetchUsers() {
       try {
         const response = await usersAPI.getTopUsers();
-        this.users = response.data.users;
+        console.log(response)
+        this.users = response.data.data.users;
       } catch (error) {
         Toast.fire({
           icon: "error",

@@ -3,11 +3,7 @@
     <NavTabs />
     <h1 class="mt-5">人氣餐廳</h1>
     <hr />
-    <RestaurantsTopCard
-      :initialrestaurant="restaurant"
-      v-for="restaurant in restaurants"
-      :key="restaurant.id"
-    />
+    <RestaurantsTopCard :initialrestaurant="restaurant" v-for="restaurant in restaurants" :key="restaurant.id" />
   </div>
 </template>
 
@@ -25,14 +21,15 @@ export default {
   },
   data() {
     return {
-      restaurants: [],
+      restaurants: []
     };
   },
   methods: {
     async fetchRestaurantsTop() {
       try {
         const response = await restaurantAPI.getRestaurantsTop();
-        this.restaurants = response.data.restaurants;
+        console.log(response)
+        this.restaurants = response.data.data;
       } catch (error) {
         Toast.fire({
           icon: "error",

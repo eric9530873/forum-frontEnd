@@ -50,7 +50,6 @@ export default {
           page: page,
           categoryId: categoryId,
         });
-        console.log(response)
         this.restaurants = response.data.data.restaurants;
         this.categories = response.data.data.categories;
         this.categoryId = response.data.data.categoryId;

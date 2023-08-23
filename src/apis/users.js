@@ -27,7 +27,7 @@ export default {
         return apiHelper.delete(`/following/${userId}`)
     },
     getTopUsers() {
-        return apiHelper.get(`/users/top`)
+        return apiHelper.get('/users/top')
     },
     upDate({ userId, formData }) {
         return apiHelper.put(`/users/${userId}`, formData)

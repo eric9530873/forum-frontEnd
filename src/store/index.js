@@ -42,7 +42,7 @@ export default new Vuex.Store({
         if (response.data.status === 'error') {
           throw new Error(response.data.message)
         }
-        console.log(response)
+        // console.log(response)
         commit('setcurrentuser', {
           id: response.data.id,
           name: response.data.name,

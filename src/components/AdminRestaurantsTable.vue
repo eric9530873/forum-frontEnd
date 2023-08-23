@@ -16,26 +16,15 @@
         <td>{{ restaurant.Category ? restaurant.Category.name : "未分類" }}</td>
         <td>{{ restaurant.name }}</td>
         <td class="d-flex justify-content-between">
-          <router-link
-            :to="{ name: 'admin-restaurant', params: { id: restaurant.id } }"
-            class="btn btn-link"
-            >Show</router-link
-          >
+          <router-link :to="{ name: 'admin-restaurant', params: { id: restaurant.id } }"
+            class="btn btn-link">Show</router-link>
 
-          <router-link
-            :to="{
-              name: 'admin-restaurant-edit',
-              params: { id: restaurant.id },
-            }"
-            class="btn btn-link"
-            >Edit</router-link
-          >
+          <router-link :to="{
+            name: 'admin-restaurant-edit',
+            params: { id: restaurant.id },
+          }" class="btn btn-link">Edit</router-link>
 
-          <button
-            @click.prevent="deleteRestaurant(restaurant.id)"
-            type="button"
-            class="btn btn-link"
-          >
+          <button @click.prevent="deleteRestaurant(restaurant.id)" type="button" class="btn btn-link">
             Delete
           </button>
         </td>
@@ -58,8 +47,8 @@ export default {
     async fetchRestaurants() {
       try {
         const response = await adminAPI.restaurants.get();
-
-        this.restaurants = response.data.restaurants;
+        console.log(response)
+        this.restaurants = response.data.data.restaurants;
       } catch (error) {
         Toast.fire({
           icon: "error",

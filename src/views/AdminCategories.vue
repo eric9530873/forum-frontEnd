@@ -6,19 +6,10 @@
     <form class="my-4">
       <div class="form-row">
         <div class="col-auto">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="新增餐廳類別..."
-            v-model="newCategoryName"
-          />
+          <input type="text" class="form-control" placeholder="新增餐廳類別..." v-model="newCategoryName" />
         </div>
         <div class="col-auto">
-          <button
-            @click.stop.prevent="createCategory()"
-            type="button"
-            class="btn btn-primary"
-          >
+          <button @click.stop.prevent="createCategory()" type="button" class="btn btn-primary">
             新增
           </button>
         </div>
@@ -41,44 +32,22 @@
             <div v-show="!category.isEditing" class="category-name">
               {{ category.name }}
             </div>
-            <input
-              v-show="category.isEditing"
-              v-model="category.name"
-              type="text"
-              class="form-control"
-            />
-            <span
-              v-show="category.isEditing"
-              @click="handleCancle(category.id)"
-              class="cancel"
-            >
+            <input v-show="category.isEditing" v-model="category.name" type="text" class="form-control" />
+            <span v-show="category.isEditing" @click="handleCancle(category.id)" class="cancel">
               ✕
             </span>
           </td>
           <td class="d-flex justify-content-between">
-            <button
-              v-show="!category.isEditing"
-              type="button"
-              class="btn btn-link mr-2"
-              @click.stop.prevent="toggleIsEditing(category.id)"
-            >
+            <button v-show="!category.isEditing" type="button" class="btn btn-link mr-2"
+              @click.stop.prevent="toggleIsEditing(category.id)">
               Edit
             </button>
-            <button
-              v-show="category.isEditing"
-              type="button"
-              class="btn btn-link mr-2"
-              @click="
-                updateCategory({ categoryId: category.id, name: category.name })
-              "
-            >
+            <button v-show="category.isEditing" type="button" class="btn btn-link mr-2" @click="
+              updateCategory({ categoryId: category.id, name: category.name })
+              ">
               Save
             </button>
-            <button
-              type="button"
-              class="btn btn-link mr-2"
-              @click.stop.prevent="deleteCategory(category.id)"
-            >
+            <button type="button" class="btn btn-link mr-2" @click.stop.prevent="deleteCategory(category.id)">
               Delete
             </button>
           </td>
@@ -109,7 +78,8 @@ export default {
     async fetchCategories() {
       try {
         const response = await adminAPI.categories.get();
-        this.categories = response.data.categories.map((category) => {
+        console.log(response)
+        this.categories = response.data.data[0].map((category) => {
           return {
             ...category,
             isEditing: false,

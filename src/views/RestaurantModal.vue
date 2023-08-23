@@ -43,7 +43,7 @@ export default {
     };
   },
   methods: {
-    async fetchRestaurantModal(restaurantId) {
+    async fetchRestaurantModal({ restaurantId }) {
       try {
         const response = await restaurantAPI.getRestaurant({ restaurantId });
         console.log(response)
@@ -57,7 +57,7 @@ export default {
           openingHours: response.data.data.restaurant.opening_hours,
           tel: response.data.data.restaurant.tel,
           address: response.data.data.restaurant.address,
-          description: response.data.data.data.restaurant.description,
+          description: response.data.data.restaurant.description,
           isFavorited: response.data.data.isFavorited,
           isLiked: response.data.data.isLiked,
         },
@@ -88,16 +88,16 @@ export default {
       });
     },
   },
-  beforeRouteUpdate(to, from, next) {
-    this.fetchRestaurantModal(to.params.id);
-    next();
-  },
+  // beforeRouteUpdate(to, from, next) {
+  //   this.fetchRestaurantModal(to.params.id);
+  //   next();
+  // },
   computed: {
     ...mapState(["currentUser"]),
   },
   created() {
-    const { id: restaurantId } = this.$route.params;
-    this.fetchRestaurantModal(restaurantId);
-  },
+    const { id: restaurantId } = this.$route.params
+    this.fetchRestaurantModal({ restaurantId });
+  }
 };
 </script>

@@ -30,8 +30,8 @@
       <router-link class="btn btn-primary btn-border mr-2"
         :to="{ name: 'restaurant-dashboard', params: { id: restaurant.id } }">Dashboard</router-link>
 
-      <button type="button" class="btn btn-danger btn-border mr-2" v-if="restaurant.isFavorited"
-        @click="deleteFavorite">
+
+      <button type="button" class="btn btn-danger btn-border mr-2" v-if="restaurant.isFavorited" @click="deleteFavorite">
         移除最愛
       </button>
       <button type="button" class="btn btn-primary btn-border mr-2" v-else @click="addFavorite">

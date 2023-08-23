@@ -72,14 +72,14 @@ export default {
         console.log(response);
         this.restaurant = {
           ...this.restaurant,
-          id: response.data.restaurant.id,
-          name: response.data.restaurant.name,
-          categoryName: response.data.restaurant.Category.name,
-          image: response.data.restaurant.image,
-          openingHours: response.data.restaurant.opening_hours,
-          tel: response.data.restaurant.tel,
-          address: response.data.restaurant.address,
-          description: response.data.restaurant.description,
+          id: response.data.data.restaurant.id,
+          name: response.data.data.restaurant.name,
+          categoryName: response.data.data.restaurant.Category.name,
+          image: response.data.data.restaurant.image,
+          openingHours: response.data.data.restaurant.opening_hours,
+          tel: response.data.data.restaurant.tel,
+          address: response.data.data.restaurant.address,
+          description: response.data.data.restaurant.description,
         };
       } catch (error) {
         Toast.fire({

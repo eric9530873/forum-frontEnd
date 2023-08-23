@@ -44,14 +44,14 @@ export default {
         const response = await adminAPI.restaurants.getDetail({ restaurantId });
         this.restaurant = {
           ...this.restaurant,
-          id: response.data.restaurant.id,
-          name: response.data.restaurant.name,
-          tel: response.data.restaurant.tel,
-          address: response.data.restaurant.address,
-          openingHours: response.data.restaurant.opening_hours,
-          description: response.data.restaurant.description,
-          image: response.data.restaurant.image,
-          categoryId: response.data.restaurant.CategoryId,
+          id: response.data.data.restaurant.id,
+          name: response.data.data.restaurant.name,
+          tel: response.data.data.restaurant.tel,
+          address: response.data.data.restaurant.address,
+          openingHours: response.data.data.restaurant.opening_hours,
+          description: response.data.data.restaurant.description,
+          image: response.data.data.restaurant.image,
+          categoryId: response.data.data[0],
         };
       } catch (error) {
         Toast.fire({

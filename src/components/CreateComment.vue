@@ -33,6 +33,7 @@ export default {
   },
   methods: {
     async handleSubmit() {
+      console.log(this.restaurantId)
       try {
         if (!this.text) {
           Toast.fire({
@@ -42,6 +43,7 @@ export default {
           return
         }
         const response = await commentsAPI.creat({ restaurantId: this.restaurantId, text: this.text })
+
         if (response.data.status === 'error') {
           throw new Error(response.data.message)
         }

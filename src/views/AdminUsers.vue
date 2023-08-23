@@ -1,7 +1,7 @@
 <template>
     <div class="container py-5">
         <!-- AdminNav Component -->
-        <AdminNav/>
+        <AdminNav />
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -25,11 +25,13 @@
                         1
                     </th>
                     <td>{{ user.email }}</td>
-                    <td>{{user.isAdmin ? 'admin' : 'user'}}</td>
-                    <td >
-                            <button v-if="currentUser.id !== user.id" @click="addAdmin({ userId: user.id, isAdmin: user.isAdmin })" type="button" class="btn btn-link">
-                                {{ user.isAdmin ? 'set as user' : 'set as admin' }}
-                            </button>
+                    <td>{{ user.isAdmin ? 'admin' : 'user' }}</td>
+                    <td>
+                        <button v-if="currentUser.id !== user.id"
+                            @click="addAdmin({ userId: user.id, isAdmin: user.isAdmin })" type="button"
+                            class="btn btn-link">
+                            {{ user.isAdmin ? 'set as user' : 'set as admin' }}
+                        </button>
                     </td>
                 </tr>
             </tbody>
@@ -43,38 +45,39 @@ import adminAPI from '../apis/admin'
 import { Toast } from '@/utils/helpers';
 import { mapState } from 'vuex';
 export default {
-    name:'AdminUsers',
-    components:{
+    name: 'AdminUsers',
+    components: {
         AdminNav
     },
-    data(){
-        return{
-            users:[],
+    data() {
+        return {
+            users: [],
         }
     },
-    methods:{
-        async fetchUsers(){
-            try{
+    methods: {
+        async fetchUsers() {
+            try {
                 const response = await adminAPI.users.get()
-                if(response.data.status ==='error'){
+                console.log(response)
+                if (response.data.status === 'error') {
                     throw new Error(response.data.message)
                 }
-                this.users = response.data.users
-            }catch(error){
+                this.users = response.data.data
+            } catch (error) {
                 Toast.fire({
-                    icon:'error',
-                    title:'無法取得使用者資料'
+                    icon: 'error',
+                    title: '無法取得使用者資料'
                 })
             }
         },
-        async addAdmin({userId,isAdmin}){
-            try{
-                const response = await adminAPI.users.upDate({ userId, isAdmin: (!isAdmin).toString()})
-                if(response.data.status ==='error'){
+        async addAdmin({ userId, isAdmin }) {
+            try {
+                const response = await adminAPI.users.upDate({ userId, isAdmin: (!isAdmin).toString() })
+                if (response.data.status === 'error') {
                     throw new Error(response.data.message)
                 }
-                this.users = this.users.map( user =>{
-                    if ( user.id === userId ) {
+                this.users = this.users.map(user => {
+                    if (user.id === userId) {
                         return {
                             ...user,
                             isAdmin: !isAdmin
@@ -82,15 +85,15 @@ export default {
                     }
                     return user
                 })
-            }catch(error){
+            } catch (error) {
                 Toast.fire({
-                    icon:'error',
-                    title:'無法變更管理員'
+                    icon: 'error',
+                    title: '無法變更管理員'
                 })
             }
         }
     },
-    created(){
+    created() {
         this.fetchUsers()
     },
     computed: {
